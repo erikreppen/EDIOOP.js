@@ -122,12 +122,12 @@ So, where am I going with this? Well there's a number of wins here:
 Why?
 --
 
-Edioop was essentially born when I was working on some really nasty legacy code by a non-JS dev that was chock full of circular dependencies and very hard to modify without running into a bug situation that resembled whack-a-mole. There was no time for a total rewrite of that funcionality so I basically ended up using jQuery's generic object events-on-the-fly system to respond to actions going on in spaghetti code so I could react without breaking the mess in unexpected ways. It felt like cheating but I saw potential there for app logic separation from DOM concerns so I designed something a bit more formal.
+Edioop was essentially born when I was working on some really nasty legacy code by a non-JS dev that was chock full of circular dependencies and very hard to modify without running into a bug situation that resembled whack-a-mole. There was no time for a total rewrite of that functionality so I basically ended up using jQuery's generic object events-on-the-fly system to respond to actions going on in spaghetti code so I could react without breaking the mess in unexpected ways. It felt like cheating but I saw potential there for app logic separation from DOM concerns so I designed something a bit more formal.
 
 I am not using jQuery for this iteration of edioop however, as I wanted something that was neutral to any JS platform context and JQ's time as a DOM normalizer with convenient side-benefits is coming to a close. For the web examples, edioop relies on a slightly modified version of Node.js's event system with the intention that it will also be easy to use for Node.js projects since the same API is in use.
 
 Ideas/Coming Soon
 --
 
-I'll hit this later, but among other things, the $edi method will get some convenience stuff, like the ability to set and respond to events on any object generically (similar to JQ's thing where you can do like so: $(someNonDOMObj).on('yay',handler) and actually trigger'yay' on that same jq-wrapped object)
+I'll hit this later, but among other things, the $edi method will get some convenience stuff, like the ability to set and respond to events on any object generically (similar to JQ's thing where you can do like so: <code>$(someNonDOMObj).on('yay',handler)</code> and actually trigger'yay' on that same jq-wrapped object). An event-socketing system to make it easy to define handlers for events an edi object responds to filtered by factory or specific instances. There's also potential for validating arguments and setting contracts. For now I think I'm more interested in simply being able to re-use existing edi handlers and interfaces with potential for merging and overriding handlers. On validation, however, I do want to work out some standardized data object types for data-binding wins.
 
