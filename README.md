@@ -1,7 +1,8 @@
 edioop.js
 =========
 
-An application architecture tool. Event Driven Interfaces for OOP APIs.
+Event Driven Interfaces for OOP APIs - An Application Architecture Tool
+--
 
 So, the basic idea here is that I have a factory builder that rewires constructors with a specialty property to build out an event-driven interface such that when you do something like this:
 
@@ -25,6 +26,7 @@ You could also listen and respond to that event call with this:
 
 The constructor could have been defined, wired up and then the object instantiated like so:
 
+<pre>
 <code>
 function EdiObjectConstructor(){
 	EdiObjectConstructor.edi = {
@@ -42,9 +44,11 @@ $edi.addFactory(EdiObjectConstructor);
 
 var ediObject = $edi.EdiObjectCostructor();
 </code>
+</pre>
 
 And there is bubbling from instances to factories to the namespace/utility function $edi:
 
+<pre>
 <code>
 ediObject.on('ediMethod', function(e){
 	console.log('instance: ' + e.var1);
@@ -83,9 +87,11 @@ ediObjectFromDifferentFactory.ediMethod('var 1 value');
 //'global/event: var 1 value'
 
 </code>
+</pre>
 
 You can simulate any action by firing off an event object:
 
+<pre>
 <code>
 
 var eventObject = {
@@ -97,6 +103,7 @@ ediObject.fire('ediMethod',eventObject);
 //equivalent to ediObject.ediMethod('var 1 value','var 2 value');
 
 </code>
+</pre>
 
 So, where am I going with this? Well there's a number of wins here:
 
