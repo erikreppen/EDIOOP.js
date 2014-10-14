@@ -5,12 +5,15 @@ An application architecture tool. Event Driven Interfaces for OOP APIs.
 
 So, the basic idea here is that I have a factory builder that rewires constructors with a specialty property to build out an event-driven interface such that when you do something like this:
 
+<pre>
 <code>
 	ediObject.ediMethod('var1 value', 'var2 value');
 </code>
+</pre>
 
 You could also listen and respond to that event call with this:
 
+<pre>
 <code>
 	ediObject.on('ediMethod', function(e){
 		console.log(e.var1); //'var1 value'
@@ -18,6 +21,7 @@ You could also listen and respond to that event call with this:
 		console.log(e.factory.edi_id); //'EdiObjectConstructor'
 	} );
 </code>
+</pre>
 
 The constructor could have been defined, wired up and then the object instantiated like so:
 
@@ -108,4 +112,15 @@ So, where am I going with this? Well there's a number of wins here:
 
 6. Ease of DOM isolation without reinventing the whole damned system. The DOM API is often misunderstood, IMO. It's actually great at what it was meant to be. A verbosely-named, crystal-clear self-documenting API that was meant to work in any language and then adapted/modified to fit the given paradigm. The interaction of HTML/CSS/JS has been allowing web UI debs to produce complex UI from a granular to macro scale at a faster rate than any popular production system previously implemented. My point? It didn't need a renovation or a gigantic obtuse pointlessly abstracted layer on top of it. Just an easy to way to isolate the DOM stuff from the app logic. But the critical thing is to keep your DOM stuff out of your app stuff, not to try and own every facet of client-side web development by baking it into pointless reinventions of how it all works.
 
-Edioop was essentially born when I was working on some really nasty legacy code by a non-JS dev that was chock full of circular dependencies and very hard to modify. I basically ended up using jQuery's generic object event system to respond to action going on in spaghetti code so I could respond to those actions without breaking the mess in unexpected ways. It felt like cheating so I imagined something a bit more formal.
+Why?
+--
+
+Edioop was essentially born when I was working on some really nasty legacy code by a non-JS dev that was chock full of circular dependencies and very hard to modify without running into a bug situation that resembled whack-a-mole. There was no time for a total rewrite of that funcionality so I basically ended up using jQuery's generic object events-on-the-fly system to respond to actions going on in spaghetti code so I could react without breaking the mess in unexpected ways. It felt like cheating but I saw potential there for app logic separation from DOM concerns so I designed something a bit more formal.
+
+I am not using jQuery for this iteration of edioop however, as I wanted something that was neutral to any JS platform context and JQ's time as a DOM normalizer with convenient side-benefits is coming to a close. For the web examples, edioop relies on a slightly modified version of Node.js's event system with the intention that it will also be easy to use for Node.js projects since the same API is in use.
+
+Ideas/Coming Soon
+--
+
+I'll hit this later, but among other things, the $edi method will get some convenience stuff, like the ability to set and respond to events on any object generically (similar to JQ's thing where you can do like so: $(someNonDOMObj).on('yay',handler) and actually trigger'yay' on that same jq-wrapped object)
+
